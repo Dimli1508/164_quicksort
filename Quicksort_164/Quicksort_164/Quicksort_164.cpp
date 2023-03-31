@@ -1,84 +1,97 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-
 int arr[20];
-int cap_count = 0;
-int nov_count = 0;
+int cmp_count = 0;
+int mov_count = 0;
 int n;
 void input() {
-	while (true) {
-		cout << "masukkan panjang element array : ";
-		cin >> n;
+    while (true)
+    {
+        cout << "Masukkan panjang elemen array :";
+        cin >> n;
 
-		if (n <= 20)
-			break;
-		else
-			cout << "\n maksimum panjang element array : ";
-		
+        if (n <= 20)
+            break;
+        else
+            cout << "\n Maksimum Panjang array adalah 20" << endl;
+    }
 
-	}
+    cout << "\n====================" << endl;
+    cout << "\nEnter array elemen" << endl;
+    cout << "====================" << endl;
 
-	cout << "\n=======================" << endl;
-	cout << "\nEnter Array Element" << endl;
-	cout << "\n=======================" << endl;
-
-	for (int i = 0; i < n; i++) {
-		cout << "<" << (i + 1) << ">";
-		cin >> arr[i]
-	}
+    for (int i = 0; i < n; i++)
+    {
+        cout << "<" << (i + 1) << ">";
+        cin >> arr[i];
+    }
 }
 
-void swap(int x, int y) {
-	int temp;
-	temp = arr[x];
-	arr[x] = arr[y];
-	arr[y] = temp;
+void swap(int x, int y)
+{
+    int temp;
+    temp = arr[x];
+    arr[x] = arr[y];
+    arr[y] = temp;
 }
 
-void q_short(int low, int high) {
-	int pivot, i, j;
-	if (low > high)
-		return;
-	i = low + 1;
-	j = high;
-	pivot = arr[low];
+void q_short(int low, int high)
+{
+    int pivot, i, j;
+    if (low > high) 
+        return;
+    pivot = arr[low];
+    i = low + 1;
+    j = high;
 
-	while (i <= j)
-	{
-		while ((arr{ i } <= pivot) && (1 <= high))
-		{
-			i++;
-			cnp_count++;
-		}
-		cnp_count++;
-		if (i < j)
-		{
-			swap(i, j);
-			mov_count++;
-		}
-	}
-	q_short(low, j - 1);
-	q_short(j + 1, high);
+    while (i <= j)
+    {
+        while ((arr[i] <= pivot) && (i <= high))
+        {
+            i++;
+            cmp_count++;
+        }
+        cmp_count++;
+        while ((arr[j] > pivot) && (j >= low))
+            j--;
+        cmp_count++;
+    }
+    cmp_count++;
+    if (i < j)
+    {
+        swap(i, j);
+        mov_count++;
+    }
+    cmp_count++;
+    if (low < j)
+    {
+        swap(low, j);
+        mov_count++;
+    }
+    q_short(low, j - 1);      
+    q_short(j + 1, high);                        
 }
+
+
+
 void display() {
-	cout << "\n==================" << endl;
-	cout << "==Sorted Array==" << endl;
-	cout << "\n==================" << endl;
+    cout << "\n==========" << endl;
+    cout << "==Sorted Array==" << endl;
+    cout << "==========" << endl;
 
-	for (int i = 0; i < n; i++)
-	{
-		cout << arr[i] << " ";
-	}
-	cout << "\n\nNumber of comparasions: " << cmp_count << endl;
-	cout << "Number of data movement: " << mov_count << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout << "\n\nNumber of comparasions: " << cmp_count << endl;
+    cout << "Number of data movement: " << mov_count << endl;
 }
 int main()
 {
-	input();
-	//Sort the array using quick sort
-	q_short(0, n - 1);
-	display();
-	system("pause");
+    input();
+    q_short(0, n - 1);
+    display();
+    system("pause");
 
-	return 0;
+    return 0;
 }
