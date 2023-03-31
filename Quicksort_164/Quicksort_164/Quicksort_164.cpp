@@ -35,3 +35,31 @@ void swap(int x, int y) {
 	arr[y] = temp;
 }
 
+void q_short(int low, int high) {
+	int pivot, i, j;
+	if (low > high)
+		return;
+	i = low + 1;
+	j = high;
+	pivot = arr[low];
+
+	while (i <= j)
+	{
+		while ((arr{ i } <= pivot) && (1 <= high))
+		{
+			i++;
+			cnp_count++;
+		}
+		cnp_count++;
+		if (i < j)
+		{
+			swap(i, j);
+			mov_count++;
+		}
+	}
+	q_short(low, j - 1);
+	q_short(j + 1, high);
+
+
+
+}
